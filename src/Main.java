@@ -1,30 +1,28 @@
-import br.com.dio.desafio.dominio.Bootcamp;
-import br.com.dio.desafio.dominio.Curso;
-import br.com.dio.desafio.dominio.Dev;
-import br.com.dio.desafio.dominio.Mentoria;
+import br.com.dio.desafio.dominio.*;
 
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
         Curso curso1 = new Curso();
-        curso1.setTitulo("curso java");
-        curso1.setDescricao("descrição curso java");
+        curso1.setTitulo("Curso Java");
+        curso1.setDescricao("Descrição Curso Java");
         curso1.setCargaHoraria(8);
 
         Curso curso2 = new Curso();
-        curso2.setTitulo("curso js");
-        curso2.setDescricao("descrição curso js");
+        curso2.setTitulo("Curso JS");
+        curso2.setDescricao("Descrição Curso JS");
         curso2.setCargaHoraria(4);
 
         Mentoria mentoria = new Mentoria();
-        mentoria.setTitulo("mentoria de java");
-        mentoria.setDescricao("descrição mentoria java");
+        mentoria.setTitulo("Mentoria de Java");
+        mentoria.setDescricao("Descrição Mentoria Java");
         mentoria.setData(LocalDate.now());
 
-        /*System.out.println(curso1);
-        System.out.println(curso2);
-        System.out.println(mentoria);*/
+        Forum forum = new Forum();
+        ConteudoForum conteudo1 = new ConteudoForum("Machine Learning com Java", "Desvendando Padrões e Fazendo Previsões");
+        ConteudoForum conteudo2 = new ConteudoForum("Web com Java", "Desenvolvendo Aplicações Web Dinâmicas");
+        ConteudoForum conteudo3 = new ConteudoForum("Redes Neurais Artificiais com Java", "Simulando o Funcionamento do Cérebro");
 
         Bootcamp bootcamp = new Bootcamp();
         bootcamp.setNome("Bootcamp Java Developer");
@@ -39,25 +37,31 @@ public class Main {
         System.out.println("Conteúdos Inscritos Camila:" + devCamila.getConteudosInscritos());
         devCamila.progredir();
         devCamila.progredir();
+        devCamila.postarConteudoNoForum(forum, conteudo1);
+        devCamila.postarConteudoNoForum(forum, conteudo3);
         System.out.println("-");
         System.out.println("Conteúdos Inscritos Camila:" + devCamila.getConteudosInscritos());
         System.out.println("Conteúdos Concluídos Camila:" + devCamila.getConteudosConcluidos());
         System.out.println("XP:" + devCamila.calcularTotalXp());
+        System.out.println("IQ:" + devCamila.calcularIq());
 
         System.out.println("-------");
 
         Dev devJoao = new Dev();
-        devJoao.setNome("Joao");
+        devJoao.setNome("João");
         devJoao.inscreverBootcamp(bootcamp);
         System.out.println("Conteúdos Inscritos João:" + devJoao.getConteudosInscritos());
         devJoao.progredir();
         devJoao.progredir();
         devJoao.progredir();
+        devJoao.postarConteudoNoForum(forum, conteudo2);
         System.out.println("-");
         System.out.println("Conteúdos Inscritos João:" + devJoao.getConteudosInscritos());
         System.out.println("Conteúdos Concluidos João:" + devJoao.getConteudosConcluidos());
         System.out.println("XP:" + devJoao.calcularTotalXp());
+        System.out.println("IQ:" + devJoao.calcularIq());
 
+        forum.exibirConteudos();
     }
 
 }

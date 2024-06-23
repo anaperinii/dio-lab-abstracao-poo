@@ -6,6 +6,15 @@ public class Dev {
     private String nome;
     private Set<Conteudo> conteudosInscritos = new LinkedHashSet<>();
     private Set<Conteudo> conteudosConcluidos = new LinkedHashSet<>();
+    private List<ConteudoForum> interacoesForum = new ArrayList<>();
+
+    public void Forum() {
+        this.interacoesForum = new ArrayList<>();
+    }
+
+    public int calcularIq() {
+        return this.interacoesForum.size();
+    }
 
     public void inscreverBootcamp(Bootcamp bootcamp){
         this.conteudosInscritos.addAll(bootcamp.getConteudos());
@@ -22,21 +31,18 @@ public class Dev {
         }
     }
 
-    public double calcularTotalXp() {
-        Iterator<Conteudo> iterator = this.conteudosConcluidos.iterator();
-        double soma = 0;
-        while(iterator.hasNext()){
-            double next = iterator.next().calcularXp();
-            soma += next;
-        }
-        return soma;
-
-        /*return this.conteudosConcluidos
-                .stream()
-                .mapToDouble(Conteudo::calcularXp)
-                .sum();*/
+    public void postarConteudoNoForum(Forum forum, ConteudoForum conteudo) {
+        forum.postarConteudo(conteudo);
+        this.interacoesForum.add(conteudo);
+        System.out.println(this.nome + " postou no Fórum: " + conteudo.getTitulo());
     }
 
+    public double calcularTotalXp() {
+        return this.conteudosConcluidos
+                .stream()
+                .mapToDouble(Conteudo::calcularXp)
+                .sum();
+    }
 
     public String getNome() {
         return nome;
